@@ -1,0 +1,27 @@
+apiVersion: core.k8sgpt.ai/v1alpha1
+kind: K8sGPT
+metadata:
+  name: k8sgpt-sample
+  namespace: k8sgpt-operator-system
+spec:
+  ai:
+    enabled: true
+    model: ggml-gpt4all-j
+    backend: localai
+    baseUrl: http://local-ai.local-ai.svc.cluster.local:8080/v1
+  noCache: false
+  version: v0.3.8
+---
+apiVersion: core.k8sgpt.ai/v1alpha1
+kind: K8sGPT
+metadata:
+  name: k8sgpt-local
+  namespace: local-ai
+spec:
+  ai:
+    enabled: true
+    model: ggml-gpt4all-j
+    backend: localai
+    baseUrl: http://local-ai.local-ai.svc.cluster.local:8080/v1
+  noCache: false
+  version: v0.3.8

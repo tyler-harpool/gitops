@@ -1,0 +1,42 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+  name: k8sgpt-operator
+  # You'll usually want to add your resources to the argocd namespace.
+  namespace: argocd
+  # Add this finalizer ONLY if you want these to cascade delete.
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  # The project the application belongs to.
+  project: default
+  # Source of the application manifests
+  source:
+    repoURL: https://charts.k8sgpt.ai/  # Can point to either a Helm chart repo or a git repo.
+    targetRevision: 0.0.19  # For Helm, this refers to the chart version.
+
+    # helm specific config1
+    chart: k8sgpt-operator   # Set this when pulling directly from a Helm repo. DO NOT set for git-hosted Helm charts.
+    helm:
+      # Extra parameters to set (same as setting through values.yaml, but these take precedence)
+      # Release name override (defaults to application name)
+      releaseName: k8sgpt-operator
+      # Optional Helm version to template with. If omitted it will fall back to look at the 'apiVersion' in Chart.yaml
+      # and decide which Helm binary to use automatically. This field can be either 'v2' or 'v3'.
+      version: v3
+
+  # Destination cluster and namespace to deploy the application
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: k8sgpt-operator-system
+
+
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
