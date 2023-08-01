@@ -15,7 +15,7 @@ spec:
   # Source of the application manifests
   source:
     repoURL: https://charts.k8sgpt.ai/  # Can point to either a Helm chart repo or a git repo.
-    targetRevision: 0.0.19  # For Helm, this refers to the chart version.
+    targetRevision: 0.0.17  # For Helm, this refers to the chart version.
 
     # helm specific config1
     chart: k8sgpt-operator   # Set this when pulling directly from a Helm repo. DO NOT set for git-hosted Helm charts.

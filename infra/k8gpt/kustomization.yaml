@@ -3,9 +3,10 @@ kind: Kustomization
 
 
 resources:
-- localai.yaml
 - k8gpt.yaml
+- localai.yaml
 - k8gptCustomResource.yaml
-- service.yaml
-
+####### Uncomment to test that gpt is working. 
+####### This will be broken and our results should be in local-ai.
+#- broken-pod.yaml
 
